@@ -1,6 +1,8 @@
 import { Box, ChakraProvider, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import theme from "../theme";
+import Confetti from 'react-confetti'
+import { Fireworks } from 'fireworks/lib/react'
 
 function HomePage () {
 
@@ -12,6 +14,30 @@ function HomePage () {
     const [minutesDating, setMinutesDating] = React.useState()
     const [secondsDating, setSecondsDating] = React.useState()
 
+    const [showConfetti, setShowConfetti] = React.useState(false)
+
+    let fxProps = {
+        count: 1,
+        interval: 1000,
+        colors: [
+            '#FFC0CB',
+            '#FFB6C1',
+            '#FF69B4',
+            '#FF1493',
+            '#DB7093',
+            '#C71585',
+            '#FFC0CB',
+            '#FFB6C1',
+            '#FF69B4',
+            '#FF1493',
+            '#DB7093',
+        ],
+        // CENTER THE FIREWORKS
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2
+        
+    }
+
     React.useEffect(() => {
         const welcomeList = ['Yo', 'Hello', "What's up?", "Hi", "Heyy", "Hey Cutie", "What's Shakin'?", "WYD?"]
         const welcomeEmoji = ['👋', '😎', '😀', '😘', '😌', '🥶', '🥳']
@@ -20,6 +46,24 @@ function HomePage () {
         const randomEmoji = Math.floor(Math.random() * welcomeEmoji.length)
 
         setWelcomeMessage(`${welcomeList[randomMessage]} ${welcomeEmoji[randomEmoji]}`)
+
+        const anniversary = new Date('May 17, 2022 12:50:00 GMT+00:00');
+
+        // Detect if today is the anniversary or is a monthaversary
+        const today = new Date();
+        const todayMonth = today.getMonth();
+        const todayDay = today.getDate();
+
+        const anniversaryMonth = anniversary.getMonth();
+        const anniversaryDay = anniversary.getDate();
+
+        const isAnniversary = todayMonth === anniversaryMonth && todayDay === anniversaryDay;
+        const isMonthaversary = todayMonth !== anniversaryMonth && todayDay === anniversaryDay;
+
+        if (isAnniversary || isMonthaversary) {
+            // Set off the confetti
+            setShowConfetti(true)
+        }
 
     }, [])
 
@@ -71,6 +115,32 @@ function HomePage () {
 
     return (
         <ChakraProvider theme={theme}>
+            
+            {showConfetti && 
+                <>
+                    <Confetti 
+                        width={window.innerWidth}
+                        height={window.innerHeight}
+                        colors={[
+                            '#FFC0CB',
+                            '#FFB6C1',
+                            '#FF69B4',
+                            '#FF1493',
+                            '#DB7093',
+                            '#C71585',
+                            '#FFC0CB',
+                            '#FFB6C1',
+                            '#FF69B4',
+                            '#FF1493',
+                            '#DB7093',
+                        ]}
+                        numberOfPieces={800}
+                    />
+
+                    <Fireworks {...fxProps} />
+                </>
+            
+            }
 
             <Box
                 // Vertically and Horizontally Centered
