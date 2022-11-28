@@ -115,6 +115,10 @@ function HomePage () {
                     </Text>
 
                     <Text>
+                        {hoursDating} hours
+                    </Text>
+
+                    <Text>
                         {minutesDating} minutes
                     </Text>
 
