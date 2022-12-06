@@ -7,7 +7,11 @@ import { NavLink } from "react-router-dom";
 
 function HomePage () {
 
+    const [anniversary] = React.useState(new Date('May 17, 2022 12:50:00 GMT+00:00'))
+    const [goldenAnniversary] = React.useState(new Date() === new Date('May 17, 2072 12:50:00 GMT+00:00'))
+
     const [welcomeMessage, setWelcomeMessage] = React.useState()
+
     const [yearsDating, setYearsDating] = React.useState()
     const [monthsDating, setMonthsDating] = React.useState()
     const [daysDating, setDaysDating] = React.useState()
@@ -16,39 +20,25 @@ function HomePage () {
     const [secondsDating, setSecondsDating] = React.useState()
 
     const [showConfetti, setShowConfetti] = React.useState(false)
+    const [confettiColorList, setConfettiColorList] = React.useState(['#FFC0CB', '#FFB6C1', '#FF69B4', '#FF1493', '#DB7093', '#C71585', '#FFC0CB', '#FFB6C1', '#FF69B4', '#FF1493', '#DB7093',])
 
     let fxProps = {
         count: 1,
         interval: 1000,
-        colors: [
-            '#FFC0CB',
-            '#FFB6C1',
-            '#FF69B4',
-            '#FF1493',
-            '#DB7093',
-            '#C71585',
-            '#FFC0CB',
-            '#FFB6C1',
-            '#FF69B4',
-            '#FF1493',
-            '#DB7093',
-        ],
+        colors: confettiColorList,
         // CENTER THE FIREWORKS
         x: window.innerWidth / 2,
         y: window.innerHeight / 2
-        
     }
 
     React.useEffect(() => {
-        const welcomeList = ['Yo', 'Hello', "What's up?", "Hi", "Heyy", "Hey Cutie", "What's Shakin'?", "WYD?"]
-        const welcomeEmoji = ['👋', '😎', '😀', '😘', '😌', '🥶', '🥳']
+        const welcomeList = ['Yo', 'Hello', "What's up?", "Hi", "Heyy", "Hey Cutie", "What's Shakin'?", "WYD?", "i love you", "AHHHHH", "Fard"]
+        const welcomeEmoji = ['👋', '😎', '😀', '😘', '😌', '🥶', '🥳', '❤️', '💨', '🦶', '🫶']
 
         const randomMessage = Math.floor(Math.random() * welcomeList.length)
         const randomEmoji = Math.floor(Math.random() * welcomeEmoji.length)
 
         setWelcomeMessage(`${welcomeList[randomMessage]} ${welcomeEmoji[randomEmoji]}`)
-
-        const anniversary = new Date('May 17, 2022 12:50:00 GMT+00:00');
 
         // Detect if today is the anniversary or is a monthaversary
         const today = new Date();
@@ -66,19 +56,25 @@ function HomePage () {
             setShowConfetti(true)
         }
 
-    }, [])
+        // Detect if today is the golden anniversary
+        if (goldenAnniversary) {
+            setConfettiColorList(['#A67C00', '#FFBF00', '#FFD447', '#FFE878', '#BF9B30'])
+            setShowConfetti(true)
+        }
+
+
+    }, [anniversary, goldenAnniversary])
 
     // Run this function continuously
     React.useEffect(() => {
         const interval = setInterval(() => {
-            const anniversary = new Date('May 17, 2022 12:50:00 GMT+00:00');
             const minute = 1000 * 60;
             const hour = minute * 60;
             const day = hour * 24;
             const year = day * 365;
-
-            // Calculate the exact number of years down to the 2nd decimal place since the anniversary and now
-            const years = Math.floor((new Date() - anniversary) / year) / 100;
+            
+            // Calculate the exact number of years down to the 2nc decimal place since the anniversary and now
+            const years = Math.floor((new Date() - anniversary) / year * 100) / 100;
 
             // Calculate the exact number of months down to the 2nc decimal place since the anniversary and now
             const months = Math.floor((new Date() - anniversary) / (year / 12) * 100) / 100;
@@ -112,7 +108,7 @@ function HomePage () {
             setSecondsDating(secondsString)
             }, 0);
         return () => clearInterval(interval);
-    }, []);
+    }, [anniversary]);
 
     return (
         <ChakraProvider theme={theme}>
@@ -122,20 +118,10 @@ function HomePage () {
                     <Confetti 
                         width={window.innerWidth}
                         height={window.innerHeight}
-                        colors={[
-                            '#FFC0CB',
-                            '#FFB6C1',
-                            '#FF69B4',
-                            '#FF1493',
-                            '#DB7093',
-                            '#C71585',
-                            '#FFC0CB',
-                            '#FFB6C1',
-                            '#FF69B4',
-                            '#FF1493',
-                            '#DB7093',
-                        ]}
+                        colors={confettiColorList}
                         numberOfPieces={800}
+                        
+
                     />
 
                     <Fireworks {...fxProps} />
@@ -163,7 +149,7 @@ function HomePage () {
                 <Box h={10} />
 
                 <NavLink to="/gallery">
-                    <Button colorScheme={'pink'} color={'white'} fontSize={'4xl'} p={8} fontWeight={'bold'} size={'lg'} _hover={{ transform: 'scale(1.2)', backgroundColor: 'pink.300' }} >Enter the Gallery</Button>
+                    <Button colorScheme={'pink'} color={'white'} borderRadius={'13px'} fontSize={{ base: '3xl', md: '3xl', lg: '4xl' }} p={8} fontWeight={'bold'} size={{ base: 'lg', md: 'lg', lg: 'xl' }} _hover={{ transform: 'scale(1.2)', backgroundColor: 'pink.300' }} >Enter the Gallery</Button>
                 </NavLink>
 
                 
