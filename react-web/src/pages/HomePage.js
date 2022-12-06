@@ -1,8 +1,9 @@
-import { Box, ChakraProvider, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, ChakraProvider, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import theme from "../theme";
 import Confetti from 'react-confetti'
 import { Fireworks } from 'fireworks/lib/react'
+import { NavLink } from "react-router-dom";
 
 function HomePage () {
 
@@ -153,25 +154,40 @@ function HomePage () {
                 flexDirection="column"
             >
                 <Heading
-                    fontSize={{ base: "2xl", md: "4xl", lg: "6rem" }}
+                    fontSize={{ base: "5xl", md: "5xl", lg: "6rem" }}
                     fontWeight="extrabold"
                     textShadow={'0px 0px 10px #000000'}
                 >
                     {welcomeMessage}
-                </Heading>
+                </Heading> 
+                <Box h={10} />
 
-                <Text
-                    fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
-                    fontWeight="bold"
-                >
-                    We've been dating for:
-                </Text>
+                <NavLink to="/gallery">
+                    <Button colorScheme={'pink'} color={'white'} fontSize={'4xl'} p={8} fontWeight={'bold'} size={'lg'} _hover={{ transform: 'scale(1.2)', backgroundColor: 'pink.300' }} >Enter the Gallery</Button>
+                </NavLink>
 
+                
+                <Box h={10} />
                 <Box
                     fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
                     fontWeight={'bold'}
                     textAlign={'center'}
+                    backgroundColor={'pink.200'}
+                    borderRadius={'12px'}
+                    w={{ base: "60vw", md: "40vw", lg: "30vw" }}
+                    p={'10px'}
+                    _hover={{
+                        backgroundColor: 'pink.300',
+                        transform: 'scale(1.05)'
+                    }}
+                    transition={'all 0.2s ease-in-out'}
                 >
+                    <Text
+                        fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
+                        fontWeight="bold"
+                    >
+                        We've been dating for:
+                    </Text>
                     <Text>
                         {yearsDating} years
                     </Text>
@@ -196,6 +212,7 @@ function HomePage () {
                         {secondsDating} seconds
                     </Text>
                 </Box>
+
 
             </Box>
 
