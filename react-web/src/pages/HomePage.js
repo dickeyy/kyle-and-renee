@@ -74,22 +74,22 @@ function HomePage () {
             const year = day * 365;
             
             // Calculate the exact number of years down to the 2nc decimal place since the anniversary and now
-            const years = Math.floor((new Date() - anniversary) / year * 100) / 100;
+            const years = Math.floor((new Date() - anniversary) / year);
 
             // Calculate the exact number of months down to the 2nc decimal place since the anniversary and now
-            const months = Math.floor((new Date() - anniversary) / (year / 12) * 100) / 100;
+            const months = Math.floor((new Date() - anniversary) / (year / 12));
 
             // Calculate the exact number of days down to the 2nc decimal place since the anniversary and now
-            const days = Math.floor((new Date() - anniversary) / day * 100) / 100;
+            const days = Math.floor((new Date() - anniversary) / day);
 
             // Calculate the exact number of hours down to the 2nc decimal place since the anniversary and now
-            const hours = Math.floor((new Date() - anniversary) / hour * 100) / 100;
+            const hours = Math.floor((new Date() - anniversary) / hour);
 
             // Calculate the exact number of minutes down to the 2nc decimal place since the anniversary and now
-            const minutes = Math.floor((new Date() - anniversary) / minute * 100) / 100;
+            const minutes = Math.floor((new Date() - anniversary) / minute)
 
-            // Calculate the exact number of seconds down to the to the whole number since the anniversary and now
-            const seconds = Math.floor((new Date() - anniversary) / 1000 * 100) / 100;
+            // Calculate the exact number of seconds with no decimal places since the anniversary and now
+            const seconds = Math.floor((new Date() - anniversary) / 1000);
 
             // Format each to a string with commas
             const yearsString = years.toLocaleString();
