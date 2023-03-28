@@ -160,7 +160,7 @@ function HomePage () {
                     textAlign={'center'}
                     backgroundColor={'pink.200'}
                     borderRadius={'12px'}
-                    w={{ base: "60vw", md: "40vw", lg: "30vw" }}
+                    w={['90vw', '80vw', '60vw', '45vw']}
                     p={'10px'}
                     _hover={{
                         backgroundColor: 'pink.300',
